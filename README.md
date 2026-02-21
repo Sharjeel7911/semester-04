@@ -1,7 +1,7 @@
 # Course Instructors
 
 ## Data Structures
-- **Lecture:** Sammra Habib
+- **Lecture:** Sammra Habib 
 - **Lab:** Hira Siddique
 
 ## Database Systems
