@@ -15,6 +15,7 @@
 !**/*.zip
 !**/*.md
 !**/*.gitignore
+!**/*.png
 
 # Ignore compiled binaries
 *.out
