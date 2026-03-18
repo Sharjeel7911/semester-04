@@ -5,7 +5,7 @@
 - **Lab:** Hira Siddique
 
 ## Database Systems
-- **Lecture:** Ayesha Zaheer
+- **Lecture:** Maria Nazir
 - **Lab:** Danish Ali Khan
 
 ## Linear Algebra
