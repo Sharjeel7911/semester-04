@@ -13,7 +13,9 @@ int main() {
     //char arr[] = { '(', '(', 'A', '+', 'B', ')', '*', '(', 'C', '-', 'D', ')', ')', '\0' };
     //char arr[] = { '(','a','+','b','+','c' ,')' };
     //char arr[] = { '(', 'A', '+', 'B', '*', 'C', ')' };
-    char arr[] = { '(', 'A', '+', 'B', '*', 'C', '-', 'D', '/', 'E', ')' };
+    //char arr[] = { '(', 'A', '+', 'B', '*', 'C', '-', 'D', '/', 'E', ')' };
+
+    char arr[] = { 'A', '+', 'B', '*', 'C', '-', 'D' };
 
     char* postfix = infixToPostfix(arr, sizeof(arr) / sizeof(char));
 
