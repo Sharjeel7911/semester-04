@@ -1,0 +1,9 @@
+Scenario:
+
+A factory manages multiple workers and departments. Each worker has a unique worker ID, name, position, and salary. Workers are assigned to departments, and each department has a unique department ID, name, and location.
+
+The factory produces different products. Each product has a unique product ID, name, and unit price. A product is manufactured in one department, but a department can produce multiple products.
+
+Workers can work on multiple products, and each product can involve multiple workers.
+
+The factory also receives orders from customers. Each customer has a unique customer ID, name, and contact number. A customer can place multiple orders, but each order belongs to only one customer. Each order includes one or more products.

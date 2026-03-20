@@ -1,13 +1,10 @@
-#include "../stack/mystack.h"
+#include "stack/mystack.h"
 
 bool isOperand(char);
 bool isOperator(char);
 int precedence(char);
 char* infixToPostfix(char*, int);
 char* infixToPrefix(char*, int);
-bool isOperator(string);
-int calculateValue(int, int, string);
-int evaluateReversePolishNotation(string*, int);
 
 int main() {
     //char arr[] = { '(', '(', '(', 'A', '+', 'B', ')', '*', '(', 'C', '-', 'E', ')', ')', '/', '(', 'F', '+', 'G', ')', ')' };
@@ -48,14 +45,6 @@ int main() {
     cout << endl;
     delete[] prefix;
 
-    //-----------------------------------------------------------------------------------------------
-
-    //string tokens[] = { "4","13","5","/","+" };
-    //string tokens[] = { "10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+" };
-    //string tokens[] = { "5", "1", "2", "+", "4", "*", "+", "3", "-" }; // = 14;           
-    string tokens[] = { "/" };
-    cout << "Evaluation of Reverse Polish Notation: " << evaluateReversePolishNotation(tokens, sizeof(tokens) / sizeof(string));
-    cout << endl;
     return 0;
 }
 
@@ -156,41 +145,4 @@ char* infixToPrefix(char* arr, int size) {
     delete[] reversed;
     delete[] temp;
     return result;
-}
-
-bool isOperator(string s) { return s == "+" || s == "-" || s == "*" || s == "/" || s == "%"; }
-
-int calculateValue(int a, int b, string s) {
-    if (s == "+") return a + b;
-    else if (s == "-") return a - b;
-    else if (s == "*") return a * b;
-    else if (s == "%") return a % b;
-    else if (s == "/") {
-        if (b == 0) {
-            cout << "Error: Division by zero\n";
-            exit(1);
-        }
-        return a / b;
-    }
-    return -1;
-}
-
-int evaluateReversePolishNotation(string* tokens, int size) {
-    MyStack<int> st(30);
-    int result = 0;
-    for (int i = 0; i < size; i++) {
-        if (isOperator(tokens[i])) {
-            if (st.size() < 2) {
-                cout << "Error: Not enough operands\n";
-                exit(1);
-            }
-            int b = st.pop();
-            int a = st.pop();
-            st.push(calculateValue(a, b, tokens[i]));
-        }
-        else {
-            st.push(stoi(tokens[i]));
-        }
-    }
-    return st.top();
 }
