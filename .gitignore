@@ -16,6 +16,7 @@
 !**/*.md
 !**/*.gitignore
 !**/*.png
+!**/*.sql
 
 # Ignore compiled binaries
 *.out
