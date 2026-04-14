@@ -1,4 +1,4 @@
-#include "stack/mystack.h"
+#include "stack/stack.h"
 
 #define stackCap 5
 

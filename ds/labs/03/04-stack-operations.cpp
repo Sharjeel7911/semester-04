@@ -1,4 +1,4 @@
-#include "stack/mystack.h"
+#include "stack/stack.h"
 
 int main() {
     MyStack<string>* table = new MyStack<string>(4);
