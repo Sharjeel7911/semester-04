@@ -13,8 +13,11 @@ struct Node {
 
 //------------------------------------------------------------------------------------------------------------------
 
+// ===================================================
 
-// ===== LINKED LIST USING HEAD & TAIL =====
+// ========== LINKED LIST USING HEAD & TAIL ==========
+
+// ===================================================
 
 template <class T>
 class MySinglyLinkedList {
@@ -359,18 +362,25 @@ public:
 //------------------------------------------------------------------------------------------------------------------
 
 
-// ===== LINKED LIST USING HEAD ONLY =====
+
+
+
+// =================================================
+
+// ========== LINKED LIST USING HEAD ONLY ==========
+
+// =================================================
 
 template <class T>
-class MySinglyLinkedListH {
+class MySinglyLinkedListHead {
 private:
     Node<T>* head;
 public:
     // constructor
-    MySinglyLinkedListH() : head(nullptr) {}
+    MySinglyLinkedListHead() : head(nullptr) {}
 
     // destructor
-    ~MySinglyLinkedListH() { while (!isEmpty()) deleteFromHead(); }
+    ~MySinglyLinkedListHead() { while (!isEmpty()) deleteFromHead(); }
 
     // checks if linked list is empty
     bool isEmpty() { return head == nullptr; }
