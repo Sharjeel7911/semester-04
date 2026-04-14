@@ -1,3 +1,6 @@
+
+-- WILL ONLY WORK FOR XAMPP IF YOU ARE USING MYSQL WORKBENCH
+
 -- phpMyAdmin SQL Dump
 -- version 4.7.9
 -- https://www.phpmyadmin.net/
