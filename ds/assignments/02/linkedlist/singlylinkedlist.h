@@ -23,10 +23,10 @@ struct Node {
 
 template <class T>
 class MySinglyLinkedList {
-private:
+public:
     Node<T>* head;
     Node<T>* tail;
-public:
+
     // constructor
     MySinglyLinkedList() : head(nullptr), tail(nullptr) {}
 
@@ -373,9 +373,9 @@ public:
 
 template <class T>
 class MySinglyLinkedListHead {
-private:
-    Node<T>* head;
 public:
+    Node<T>* head;
+
     // constructor
     MySinglyLinkedListHead() : head(nullptr) {}
 

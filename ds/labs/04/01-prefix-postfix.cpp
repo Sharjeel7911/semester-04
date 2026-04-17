@@ -81,7 +81,7 @@ char* infixToPostfix(char* arr, int size) {
         else if (isOperand(arr[i])) { result[k++] = arr[i]; }
 
         else if (isOperator(arr[i])) {
-            while (!st.isEmpty() && st.top() != '(' && (precedence(st.top()) > precedence(arr[i]) || (precedence(st.top()) == precedence(arr[i]) && arr[i] != '^'))) {
+            while (!st.isEmpty() && st.top() != '(' && (precedence(st.top()) >= precedence(arr[i]) && arr[i] != '^'))) {
                 result[k++] = st.top();
                 st.pop();
             }

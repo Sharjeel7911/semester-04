@@ -15,6 +15,8 @@ public:
     MyCircularQueue(int size) : front(0), rear(0), currSize(0), maxSize(size) { qu = new T[size]; }
     ~MyCircularQueue() { delete[] qu; }
 
+    int getFront() { return front; }
+    int getRear() { return rear; }
     bool isFull() { return currSize == maxSize; }
     bool isEmpty() { return currSize == 0; }
 
