@@ -1,84 +1,147 @@
-#include "linkedlist/singlylinkedlist.h" 
+#include <iostream>
 #include <string>
+using namespace std;
 
-struct Product {
+struct ProductNode {
     int id;
     string name;
+    ProductNode* next;
 
-    Product() : id(0), name("") {}
-    Product(int i, string n) : id(i), name(n) {}
-
-    bool operator==(const Product& other) const {
-        return id == other.id;
-    }
-
-
+    ProductNode(int i, string n) : id(i), name(n), next(nullptr) {}
 };
-
-ostream& operator<<(ostream& out, const Product& p) {
-    out << "ID: " << p.id << ", Name: " << p.name;
-    return out;
-}
 
 class ProductManagement {
 private:
-    MySinglyLinkedList<Product> productList;
+    ProductNode* head;
+    ProductNode* tail;
 public:
-    void addProduct(Product p) { productList.insertAtTail(p); }
+    ProductManagement() : head(nullptr), tail(nullptr) {}
 
-    void deleteProduct(int pos) {
-        if (pos < 0) {
-            cout << "Invalid position." << endl;
-            return;
+    ~ProductManagement() {
+        while (head != nullptr) {
+            ProductNode* temp = head;
+            head = head->next;
+            delete temp;
         }
-        productList.deleteFromPosition(pos);
     }
 
-    void displayProducts() { productList.display(); }
+    void insertAtTail(int id, string name) {
+        ProductNode* newNode = new ProductNode(id, name);
 
-    int searchById(int id) {
-        Node<Product>* temp = productList.head;
-        int pos = 0;
-        while (temp != nullptr) {
-            if (temp->data.id == id) return pos;
-            temp = temp->next;
-            pos++;
+        if (!head) {
+            head = tail = newNode;
         }
+        else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+
+    void display() {
+        if (!head) {
+            cout << "List is empty." << endl;
+            return;
+        }
+
+        ProductNode* temp = head;
+
+        cout << "Linked List:" << endl;
+
+        while (temp != nullptr) {
+            cout << "ID: " << temp->id
+                << ", Name: " << temp->name << endl;
+
+            temp = temp->next;
+        }
+    }
+
+    int searchRecord(int id) {
+        ProductNode* temp = head;
+        int position = 0;
+
+        while (temp != nullptr) {
+            if (temp->id == id) {
+                return position;
+            }
+
+            temp = temp->next;
+            position++;
+        }
+
         return -1;
     }
 
+    void deleteProductAtPosition(int pos) {
 
+        if (!head) {
+            cout << "List is empty." << endl;
+            return;
+        }
+
+        // Delete first node
+        if (pos == 0) {
+            ProductNode* temp = head;
+            head = head->next;
+
+            if (!head) {
+                tail = nullptr;
+            }
+
+            delete temp;
+            return;
+        }
+
+        ProductNode* temp = head;
+
+        for (int i = 0; temp != nullptr && i < pos - 1; i++) {
+            temp = temp->next;
+        }
+
+        if (temp == nullptr || temp->next == nullptr) {
+            cout << "Invalid position." << endl;
+            return;
+        }
+
+        ProductNode* nodeToDelete = temp->next;
+        temp->next = nodeToDelete->next;
+
+        if (nodeToDelete == tail) {
+            tail = temp;
+        }
+
+        delete nodeToDelete;
+    }
 };
 
-
 int main() {
+
     ProductManagement pm;
 
-    Product p1(101, "Laptop");
-    Product p2(102, "Mouse");
-    Product p3(103, "Keyboard");
-    Product p4(104, "Monitor");
-
-    pm.addProduct(p1);
-    pm.addProduct(p2);
-    pm.addProduct(p3);
-    pm.addProduct(p4);
+    pm.insertAtTail(101, "Laptop");
+    pm.insertAtTail(102, "Mouse");
+    pm.insertAtTail(103, "Keyboard");
+    pm.insertAtTail(104, "Monitor");
 
     cout << "Initial List:" << endl;
-    pm.displayProducts();
+    pm.display();
+
+    int idToDelete;
 
     cout << "\nEnter the product ID to search and delete: ";
-    int idToDelete;
     cin >> idToDelete;
 
-    int pos = pm.searchById(idToDelete);
-    if (pos != -1) {
-        pm.deleteProduct(pos);
-        cout << "Product with ID " << idToDelete << " deleted successfully.\n";
+    int position = pm.searchRecord(idToDelete);
+
+    if (position != -1) {
+        pm.deleteProductAtPosition(position);
+        cout << "Product with ID " << idToDelete << " deleted successfully." << endl;
     }
-    else cout << "Product with ID " << idToDelete << " not found.\n";
+    else {
+        cout << "Product with ID " << idToDelete << " not found." << endl;
+    }
 
     cout << "\nUpdated List:" << endl;
-    pm.displayProducts();
+    pm.display();
+
     return 0;
 }

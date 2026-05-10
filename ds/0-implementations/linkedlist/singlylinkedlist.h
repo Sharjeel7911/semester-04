@@ -14,7 +14,6 @@ struct Node {
 //------------------------------------------------------------------------------------------------------------------
 
 
-
 // ===================================================
 
 // ========== LINKED LIST USING HEAD & TAIL ==========
@@ -99,22 +98,7 @@ public:
     void insertAtPosition(T val, int index) {
         if (index < 0) { cout << "Index cannot be negative." << endl; return; }
         if (isEmpty() && index != 0) { cout << "List is empty. Can only insert at position 0." << endl; return; }
-
-        Node<T>* newNode = new Node<T>(val);
-
-        if (index == 0) {
-            // case I : empty list
-            if (isEmpty()) {
-                head = tail = newNode;
-            }
-            // case I : non - empty list
-            else {
-                newNode->next = head;
-                head = newNode;
-            }
-            cout << "Value inserted at position " << index << endl;
-            return;
-        }
+        if (index == 0) { insertAtHead(val); return; }
 
         // case III : insert elsewhere -> traverse to (position - 1)
         Node<T>* tempPtr = head;
@@ -129,12 +113,9 @@ public:
         }
 
         // bounds check -> ensure we didn't go past the end
-        if (tempPtr == nullptr) {
-            cout << "Index out of bounds." << endl;
-            delete newNode;
-            return;
-        }
+        if (tempPtr == nullptr) { cout << "Index out of bounds." << endl; return; }
 
+        Node<T>* newNode = new Node<T>(val);
         // link the new node
         //              [tempPtr]
         //                |
@@ -145,9 +126,7 @@ public:
         // box0 → box1 → box2 → newNode → box3 → null
 
         // update tail if inserted at end
-        if (newNode->next == nullptr) {
-            tail = newNode;
-        }
+        if (newNode->next == nullptr) tail = newNode;
         cout << "Value inserted at position " << index << endl;
     }
 
@@ -289,9 +268,7 @@ public:
 
         // delete from elsewhere: traverse to index - 1
         Node<T>* tempPtr = head;
-        for (int i = 0; i < index - 1 && tempPtr != nullptr; i++) {
-            tempPtr = tempPtr->next;
-        }
+        for (int i = 0; i < index - 1 && tempPtr != nullptr; i++) tempPtr = tempPtr->next;
 
         // bounds check
         if (tempPtr == nullptr || tempPtr->next == nullptr) {
@@ -307,9 +284,7 @@ public:
         tempPtr->next = nodeToDelete->next;
 
         // update tail if we deleted the last node
-        if (nodeToDelete == tail) {
-            tail = tempPtr;
-        }
+        if (nodeToDelete == tail) tail = tempPtr;
 
         delete nodeToDelete;
         return returningVal;
